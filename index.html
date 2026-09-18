@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FORNO — Wood-Fired Artisan Pizza · Coimbatore</title>
+<meta name="description" content="Hand-stretched dough, 48-hour fermentation, San Marzano tomatoes and a 480° oak fire. Pizza the way Naples intended — delivered in Coimbatore.">
+<meta name="theme-color" content="#0C0A08">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%F0%9F%8D%95%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Manrope:wght@300..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+<!-- ══════════ PRELOADER ══════════ -->
+<div class="pre" id="preloader" aria-hidden="true">
+  <div class="pre-in">
+    <div class="pre-logo" aria-hidden="true">
+      <span style="--i:0">F</span><span style="--i:1">O</span><span style="--i:2">R</span><span style="--i:3">N</span><span style="--i:4">O</span><span class="pre-dot" style="--i:5">.</span>
+    </div>
+    <div class="pre-track"><i id="preBar"></i></div>
+    <div class="pre-num"><span id="preNum">0</span><em>% fired</em></div>
+  </div>
+</div>
+<div class="pre-wipe" aria-hidden="true"></div>
+
+<!-- ══════════ GLOBAL FX ══════════ -->
+<div class="noise" aria-hidden="true"></div>
+<div class="progress" id="progress" aria-hidden="true"></div>
+<div class="cur-dot" id="curDot" aria-hidden="true"></div>
+<div class="cur-ring" id="curRing" aria-hidden="true"></div>
+<div class="confetti-root" id="confettiRoot" aria-hidden="true"></div>
+
+<!-- ══════════ NAV ══════════ -->
+<nav class="nav" id="nav">
+  <a class="logo" href="#top" data-hover>FORNO<span>.</span></a>
+  <div class="nav-links">
+    <a href="#menu" data-link="menu" data-hover>Menu</a>
+    <a href="#craft" data-link="craft" data-hover>Craft</a>
+    <a href="#reviews" data-link="reviews" data-hover>Reviews</a>
+    <a href="#visit" data-link="visit" data-hover>Visit</a>
+  </div>
+  <div class="nav-actions">
+    <button class="cart-btn" id="cartOpen" data-magnet="0.35" data-hover aria-label="Open your cart">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M19 6h-2c0-2.76-2.24-5-5-5S7 3.24 7 6H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7-3c1.66 0 3 1.34 3 3H9c0-1.66 1.34-3 3-3zm0 10c-2.76 0-5-2.24-5-5h2c0 1.66 1.34 3 3 3s3-1.34 3-3h2c0 2.76-2.24 5-5 5z"/></svg>
+      <span class="cart-count zero" id="cartCount">0</span>
+    </button>
+    <a href="#menu" class="btn btn-primary btn-sm nav-cta" data-magnet="0.3" data-hover><span>Order Now</span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <button class="burger" id="burger" aria-label="Open menu" data-hover><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ══════════ MOBILE MENU ══════════ -->
+<div class="m-menu" id="mMenu" aria-hidden="true">
+  <div class="m-links">
+    <a href="#menu" class="m-link" style="--i:0">Menu</a>
+    <a href="#craft" class="m-link" style="--i:1">Craft</a>
+    <a href="#reviews" class="m-link" style="--i:2">Reviews</a>
+    <a href="#visit" class="m-link" style="--i:3">Visit</a>
+  </div>
+  <div class="m-foot" style="--i:4">
+    <p>Race Course, Coimbatore</p>
+    <a href="tel:+919845670123">+91 98456 70123</a>
+  </div>
+</div>
+
+<!-- ══════════ CART DRAWER ══════════ -->
+<div class="backdrop" id="backdrop"></div>
+<aside class="drawer" id="cartDrawer" role="dialog" aria-label="Your order" aria-hidden="true">
+  <div class="drawer-head">
+    <h3>Your Box <svg class="flame-ic" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67z"/></svg></h3>
+    <button class="icon-btn" id="cartClose" data-hover aria-label="Close cart"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <div class="drawer-empty" id="cartEmpty">
+    <svg viewBox="0 0 24 24" width="52" height="52" fill="currentColor" opacity="0.35"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67z"/></svg>
+    <p>Your box is empty.<br>Let's fix that.</p>
+    <button class="btn btn-ghost btn-sm" id="browseBtn" data-hover><span>Browse the menu</span></button>
+  </div>
+  <div class="drawer-items" id="cartItems"></div>
+  <div class="drawer-foot" id="cartFoot">
+    <div class="ship">
+      <div class="ship-msg" id="shipMsg"></div>
+      <div class="ship-bar"><i id="shipBar"></i></div>
+    </div>
+    <div class="row"><span>Subtotal</span><b id="cartSub">₹0</b></div>
+    <div class="row"><span>Delivery</span><b id="cartDel">₹0</b></div>
+    <div class="row total"><span>Total</span><b id="cartTot">₹0</b></div>
+    <button class="btn btn-primary btn-block" id="checkoutBtn" data-hover><span>Checkout</span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+  </div>
+</aside>
+
+<!-- ══════════ TOASTS ══════════ -->
+<div class="toasts" id="toasts" aria-live="polite"></div>
+
+<!-- ══════════ PAGE ══════════ -->
+<div class="smooth-content" id="smooth">
+
+  <!-- HERO -->
+  <header class="hero" id="top">
+    <canvas id="embers" aria-hidden="true"></canvas>
+    <div class="hero-glow" aria-hidden="true"></div>
+
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <div class="hero-label fade" style="--d:.55s"><i class="pulse"></i>Open now · 30-min delivery in Coimbatore</div>
+        <h1 class="hero-title" aria-label="Fired by passion, sliced for joy.">
+          <span class="ht-line" data-split>FIRED BY <em>passion,</em></span>
+          <span class="ht-line" data-split>SLICED FOR <em>joy.</em></span>
+        </h1>
+        <p class="hero-sub fade" style="--d:.95s">Hand-stretched dough fermented for 48 hours, San Marzano tomatoes, fior di latte and 90 seconds in a 480° oak fire. Pizza the way Naples intended — now in Race Course.</p>
+        <div class="hero-ctas fade" style="--d:1.1s">
+          <a href="#menu" class="btn btn-primary" data-magnet="0.25" data-hover><span>Explore the Menu</span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a href="#visit" class="btn btn-ghost" data-magnet="0.25" data-hover><span>Book a table</span></a>
+        </div>
+        <div class="hero-meta fade" style="--d:1.25s">
+          <span class="stars-wrap"><span class="stars">
+            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+          </span><b>4.9</b>· 2,300+ reviews</span>
+          <i class="sep"></i>
+          <span>Free delivery over ₹999</span>
+          <i class="sep"></i>
+          <span>Open till 11 PM</span>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hv-par" data-parallax="0.09">
+          <div class="pizza-glow" aria-hidden="true"></div>
+          <div class="pizza-frame fade-s" style="--d:.7s">
+            <img src="images/hero.jpg" alt="Wood-fired pepperoni pizza fresh from the oven" draggable="false">
+          </div>
+          <div class="hero-badge fade-s" style="--d:1s" aria-hidden="true">
+            <svg class="badge-rot" viewBox="0 0 200 200">
+              <defs><path id="circPath" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
+              <text><textPath href="#circPath">WOOD FIRED • HAND MADE • SINCE 2001 • WOOD FIRED • HAND MADE • </textPath></text>
+            </svg>
+            <svg class="badge-core" viewBox="0 0 24 24" width="30" height="30" fill="currentColor"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67z"/></svg>
+          </div>
+          <div class="chip chip-a fl fade-s" style="--d:1.2s"><b>48h</b><span>slow-fermented dough</span></div>
+          <div class="chip chip-b fl2 fade-s" style="--d:1.35s"><b>480°C</b><span>oak-fired, 90 seconds</span></div>
+          <svg class="leaf leaf-a fl" viewBox="0 0 24 24" fill="#5a8a44" aria-hidden="true"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z"/></svg>
+          <svg class="leaf leaf-b fl2" viewBox="0 0 24 24" fill="#4b7a3f" aria-hidden="true"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <a class="scroll-cue fade" style="--d:1.5s" href="#menu" data-hover aria-label="Scroll to menu">
+      <span>scroll</span><i></i>
+    </a>
+  </header>
+
+  <!-- MARQUEE -->
+  <div class="marquee" aria-hidden="true">
+    <div class="mq-track">
+      <div class="mq-half">
+        <span class="mq-i">Wood-fired at 480°<i>✦</i></span><span class="mq-i o">48-hour dough<i>✦</i></span><span class="mq-i">San Marzano D.O.P.<i>✦</i></span><span class="mq-i o">Fior di latte<i>✦</i></span><span class="mq-i">Free delivery over ₹999<i>✦</i></span>
+      </div>
+      <div class="mq-half">
+        <span class="mq-i">Wood-fired at 480°<i>✦</i></span><span class="mq-i o">48-hour dough<i>✦</i></span><span class="mq-i">San Marzano D.O.P.<i>✦</i></span><span class="mq-i o">Fior di latte<i>✦</i></span><span class="mq-i">Free delivery over ₹999<i>✦</i></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MENU -->
+  <section class="section menu" id="menu">
+    <div class="container">
+      <div class="sec-head" data-reveal>
+        <span class="label">The line-up</span>
+        <h2 class="h2">Signature <em>pies</em> of the house</h2>
+        <p class="sec-sub">Six classics, zero shortcuts. Every pizza leaves our oak oven in 90 seconds flat.</p>
+      </div>
+
+      <div class="menu-grid">
+        <div class="cell" data-reveal style="--rd:.02s"><article class="card tilt">
+          <div class="card-media"><img src="images/margherita.jpg" alt="Margherita Classica" loading="lazy" draggable="false">
+            <span class="price">₹299</span><span class="tag tag-veg">VEG</span><span class="tag tag-best">BESTSELLER</span>
+          </div>
+          <div class="card-body">
+            <h3>Margherita Classica</h3>
+            <p class="card-desc">San Marzano sugo, fior di latte, hand-torn basil, cold-pressed olive oil.</p>
+            <div class="card-foot"><span class="mini">Serves 1–2</span>
+              <button class="add-btn" data-add="margherita" data-hover aria-label="Add Margherita Classica to cart"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+            </div>
+          </div>
+        </article></div>
+
+        <div class="cell" data-reveal style="--rd:.1s"><article class="card tilt">
+          <div class="card-media"><img src="images/pepperoni.jpg" alt="Pepperoni Inferno" loading="lazy" draggable="false">
+            <span class="price">₹449</span><span class="tag tag-spicy">SPICY</span>
+          </div>
+          <div class="card-body">
+            <h3>Pepperoni Inferno</h3>
+            <p class="card-desc">Double pepperoni, mozzarella and a chilli-infused hot honey drizzle.</p>
+            <div class="card-foot"><span class="mini">Serves 1–2</span>
+              <button class="add-btn" data-add="pepperoni" data-hover aria-label="Add Pepperoni Inferno to cart"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+            </div>
+          </div>
+        </article></div>
+
+        <div class="cell" data-reveal style="--rd:.18s"><article class="card tilt">
+          <div class="card-media"><img src="images/formaggi.jpg" alt="Quattro Formaggi" loading="lazy" draggable="false">
+            <span class="price">₹499</span><span class="tag tag-veg">VEG</span>
+          </div>
+          <div class="card-body">
+            <h3>Quattro Formaggi</h3>
+            <p class="card-desc">Mozzarella, smoked scamorza, gorgonzola and a snowfall of parmesan.</p>
+            <div class="card-foot"><span class="mini">Serves 1–2</span>
+              <button class="add-btn" data-add="formaggi" data-hover aria-label="Add Quattro Formaggi to cart"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+            </div>
+          </div>
+        </article></div>
+
+        <div class="cell" data-reveal style="--rd:.02s"><article class="card tilt">
+          <div class="card-media"><img src="images/bbq.jpg" alt="BBQ Smokehouse" loading="lazy" draggable="false">
+            <span class="price">₹479</span>
+          </div>
+          <div class="card-body">
+            <h3>BBQ Smokehouse</h3>
+            <p class="card-desc">Char-grilled chicken, house BBQ glaze, smoked mozzarella, pickled onion.</p>
+            <div class="card-foot"><span class="mini">Serves 1–2</span>
+              <button class="add-btn" data-add="bbq" data-hover aria-label="Add BBQ Smokehouse to cart"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+            </div>
+          </div>
+        </article></div>
+
+        <div class="cell" data-reveal style="--rd:.1s"><article class="card tilt">
+          <div class="card-media"><img src="images/verdura.jpg" alt="Verdura Garden" loading="lazy" draggable="false">
+            <span class="price">₹349</span><span class="tag tag-veg">VEG</span>
+          </div>
+          <div class="card-body">
+            <h3>Verdura Garden</h3>
+            <p class="card-desc">Roast peppers, zucchini, olives and red onion on a basil pesto base.</p>
+            <div class="card-foot"><span class="mini">Serves 1–2</span>
+              <button class="add-btn" data-add="verdura" data-hover aria-label="Add Verdura Garden to cart"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+            </div>
+          </div>
+        </article></div>
+
+        <div class="cell" data-reveal style="--rd:.18s"><article class="card tilt">
+          <div class="card-media"><img src="images/diavola.jpg" alt="La Diavola" loading="lazy" draggable="false">
+            <span class="price">₹469</span><span class="tag tag-spicy">SPICY</span>
+          </div>
+          <div class="card-body">
+            <h3>La Diavola</h3>
+            <p class="card-desc">Spicy salami, Calabrian chilli, fior di latte and hot honey. Handle with care.</p>
+            <div class="card-foot"><span class="mini">Serves 1–2</span>
+              <button class="add-btn" data-add="diavola" data-hover aria-label="Add La Diavola to cart"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+            </div>
+          </div>
+        </article></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CRAFT -->
+  <section class="section craft" id="craft">
+    <div class="container craft-grid">
+      <div class="craft-media" data-reveal="left">
+        <div class="cm-par" data-parallax="0.07"><img src="images/chef.jpg" alt="Our chef tossing dough by the wood-fired oven" loading="lazy" draggable="false"></div>
+        <div class="craft-badge fl" aria-hidden="true"><b>EST.</b><span>2001</span></div>
+      </div>
+      <div class="craft-copy">
+        <span class="label" data-reveal>Our craft</span>
+        <h2 class="h2" data-reveal style="--rd:.06s">Slow dough. <em>Fast fire.</em></h2>
+        <p data-reveal style="--rd:.12s">Our oven has burned oak every day since 2001. The dough takes two full days to rise; the bake takes ninety seconds. That tension — patience and violence — is where flavour lives.</p>
+        <ol class="steps">
+          <li class="step" data-reveal style="--rd:.1s"><b>01</b><div><h4>Hand-stretched, never rolled</h4><p>Rolling kills the air pockets. Stretching keeps the leopard-spotted, pillowy cornicione.</p></div></li>
+          <li class="step" data-reveal style="--rd:.16s"><b>02</b><div><h4>48-hour cold ferment</h4><p>Slow rise, deep flavour, easy digestion. Good dough cannot be hurried.</p></div></li>
+          <li class="step" data-reveal style="--rd:.22s"><b>03</b><div><h4>480° oak fire, 90 seconds</h4><p>Char, chew and smoke in perfect balance — the oven floor never drops below inferno.</p></div></li>
+          <li class="step" data-reveal style="--rd:.28s"><b>04</b><div><h4>Finished off the flame</h4><p>Fresh basil, Sicilian olive oil, flaky sea salt. No shortcuts, ever.</p></div></li>
+        </ol>
+      </div>
+    </div>
+    <div class="container stats" data-reveal>
+      <div class="stat"><b><span data-count="24">0</span></b><span>years behind the oven</span></div>
+      <div class="stat"><b><span data-count="480">0</span><i>°C</i></b><span>inside the oven</span></div>
+      <div class="stat"><b><span data-count="48">0</span><i>h</i></b><span>of fermentation</span></div>
+      <div class="stat"><b><span data-count="98">0</span><i>%</i></b><span>five-star reviews</span></div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="banner">
+    <div class="banner-bg" data-parallax="0.16"><img src="images/pepperoni.jpg" alt="" aria-hidden="true"></div>
+    <div class="banner-shade" aria-hidden="true"></div>
+    <div class="container banner-in" data-reveal="scale">
+      <span class="label light">Limited time</span>
+      <h2>First order?<br><em>Take 30% off.</em></h2>
+      <div class="banner-row">
+        <span class="code-chip" data-hover>CODE&nbsp;·&nbsp;<b>FORNO30</b></span>
+        <a href="#menu" class="btn btn-primary" data-magnet="0.25" data-hover><span>Claim the deal</span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="section reviews" id="reviews">
+    <div class="container">
+      <div class="sec-head center" data-reveal>
+        <span class="label">Word on the street</span>
+        <h2 class="h2">People <em>talk.</em></h2>
+      </div>
+      <div class="slider" id="slider" data-reveal>
+        <blockquote class="slide active">
+          <div class="qmark">“</div>
+          <p>The crust actually sings — crackly outside, pillowy inside. Best pizza south of Naples. Or at least south of Chennai.</p>
+          <footer><span class="avatar">PR</span><div><b>Priya R.</b><span>Race Course</span></div><span class="stars s-sm"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></span></footer>
+        </blockquote>
+        <blockquote class="slide">
+          <div class="qmark">“</div>
+          <p>Ordered at 7:58, eating by 8:25. The Diavola with hot honey should genuinely be illegal.</p>
+          <footer><span class="avatar">AM</span><div><b>Arjun M.</b><span>RS Puram</span></div><span class="stars s-sm"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></span></footer>
+        </blockquote>
+        <blockquote class="slide">
+          <div class="qmark">“</div>
+          <p>We booked their wood oven for our wedding. Guests still talk about the pizza, not the vows.</p>
+          <footer><span class="avatar">DK</span><div><b>Divya &amp; Karthik</b><span>Peelamedu</span></div><span class="stars s-sm"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></span></footer>
+        </blockquote>
+      </div>
+      <div class="controls" data-reveal>
+        <button class="arrow" id="prevSlide" data-magnet="0.4" data-hover aria-label="Previous review"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg></button>
+        <div class="dots" id="dots"></div>
+        <button class="arrow" id="nextSlide" data-magnet="0.4" data-hover aria-label="Next review"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVERSE MARQUEE -->
+  <div class="marquee rev" aria-hidden="true">
+    <div class="mq-track">
+      <div class="mq-half">
+        <span class="mq-i">Eat it hot<i>✦</i></span><span class="mq-i o">Straight from the fire<i>✦</i></span><span class="mq-i">Napoli → Coimbatore<i>✦</i></span><span class="mq-i o">Extra basil, always<i>✦</i></span>
+      </div>
+      <div class="mq-half">
+        <span class="mq-i">Eat it hot<i>✦</i></span><span class="mq-i o">Straight from the fire<i>✦</i></span><span class="mq-i">Napoli → Coimbatore<i>✦</i></span><span class="mq-i o">Extra basil, always<i>✦</i></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- VISIT -->
+  <section class="section visit" id="visit">
+    <div class="container">
+      <div class="sec-head" data-reveal>
+        <span class="label">Come say hi</span>
+        <h2 class="h2">Find the <em>fire.</em></h2>
+      </div>
+      <div class="visit-grid">
+        <div class="v-card" data-reveal style="--rd:.02s">
+          <span class="v-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></span>
+          <h3>Location</h3>
+          <p>12 Ember House, Race Course Road,<br>Coimbatore, Tamil Nadu 641018</p>
+          <span class="v-note">2 min from Race Course ground</span>
+        </div>
+        <div class="v-card" data-reveal style="--rd:.1s">
+          <span class="v-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg></span>
+          <h3>Hours</h3>
+          <p>Mon – Thu · 12:00 — 23:00<br>Fri – Sun · 12:00 — 00:30</p>
+          <span class="v-note">Oven never sleeps on weekends</span>
+        </div>
+        <div class="v-card" data-reveal style="--rd:.18s">
+          <span class="v-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></span>
+          <h3>Contact</h3>
+          <p><a href="tel:+919845670123" data-hover>+91 98456 70123</a><br><a href="mailto:ciao@forno.pizza" data-hover>ciao@forno.pizza</a></p>
+          <span class="v-note">Catering &amp; parties welcome</span>
+        </div>
+        <div class="ticket" data-reveal="right" style="--rd:.1s">
+          <div class="ticket-in">
+            <span class="label light">Skip the queue</span>
+            <p class="ticket-big">Call ahead, pick up in <em>15 minutes.</em></p>
+            <a class="ticket-phone" href="tel:+919845670123" data-hover>+91 98456 70123</a>
+          </div>
+          <svg class="ticket-flame fl" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67z"/></svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-glow" aria-hidden="true"></div>
+    <div class="container">
+      <div class="foot-hero" data-reveal>
+        <div class="foot-word" aria-hidden="true"><span>F</span><span>O</span><span>R</span><span>N</span><span>O</span></div>
+        <p class="foot-tag">Pizza, the way Naples intended.</p>
+      </div>
+      <div class="f-cols">
+        <div class="f-col" data-reveal style="--rd:.02s">
+          <h5>Explore</h5>
+          <a href="#menu" data-hover>Menu</a><a href="#craft" data-hover>Our craft</a><a href="#reviews" data-hover>Reviews</a><a href="#visit" data-hover>Visit us</a>
+        </div>
+        <div class="f-col" data-reveal style="--rd:.08s">
+          <h5>Visit</h5>
+          <p>Race Course Road,<br>Coimbatore 641018</p>
+          <p>12:00 — 23:00 daily</p>
+        </div>
+        <div class="f-col" data-reveal style="--rd:.14s">
+          <h5>Say hello</h5>
+          <a href="tel:+919845670123" data-hover>+91 98456 70123</a>
+          <a href="mailto:ciao@forno.pizza" data-hover>ciao@forno.pizza</a>
+          <div class="socials">
+            <a href="#top" aria-label="Instagram" data-hover><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2.2c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92C2.21 15.58 2.2 15.2 2.2 12s.01-3.58.07-4.85C2.42 3.92 3.94 2.38 7.15 2.27 8.42 2.21 8.8 2.2 12 2.2zm0 3.68a6.12 6.12 0 100 12.24 6.12 6.12 0 000-12.24zm0 10.1a3.98 3.98 0 110-7.96 3.98 3.98 0 010 7.96zm6.36-11.85a1.43 1.43 0 100 2.86 1.43 1.43 0 000-2.86z"/></svg></a>
+            <a href="#top" aria-label="Facebook" data-hover><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M22 12a10 10 0 10-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.5-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46H15.2c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.45 2.89h-2.33v6.99A10 10 0 0022 12z"/></svg></a>
+            <a href="#top" aria-label="YouTube" data-hover><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 00-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 00.5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 002.12 2.14c1.88.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 002.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="f-bottom">
+        <span>© <span id="year">2026</span> FORNO Pizzeria. All rights reserved.</span>
+        <span class="f-fire">Made with <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67z"/></svg> in Coimbatore</span>
+      </div>
+    </div>
+  </footer>
+
+</div><!-- /smooth-content -->
+
+<script src="main.js"></script>
+</body>
+</html>
